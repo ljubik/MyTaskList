@@ -13,7 +13,7 @@ class SubTaskAdd extends Component {
     }
     handleAddShareholder() {
      const {onSubmit, taskId} = this.props;
-     console.log("handleAddShareholder", this.state, "from suTaskAdd")
+     console.log("handleAddShareholder", this.state, "from subTaskAdd")
      if(typeof onSubmit === "function") {
         onSubmit({
             subName: this.state.subName,
@@ -48,7 +48,7 @@ class SubTaskAdd extends Component {
           onClick={this.handleAddShareholder} 
           className="small">{label}
           </button>
-          
+                    
           
         </div>)
     }

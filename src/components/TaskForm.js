@@ -27,6 +27,8 @@ class TaskForm extends React.Component {
       };
       this.input = React.createRef();
       this.handleSubTaskSubmit = this.handleSubTaskSubmit.bind(this);//bind треба обовязково робити
+      this.handleRemoveShareholder = this.handleRemoveShareholder.bind(this);
+      this.handleRemoveSubTask = this.handleRemoveSubTask.bind(this);
     }
     
     handleNameChange = (event) => {
@@ -58,8 +60,46 @@ class TaskForm extends React.Component {
 
     //для майбутнього стирання
     handleRemoveShareholder = (idx) => () => {
-      this.setState({ shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx) });
+      this.setState({ 
+        taskList: this.state.taskList.filter
+        ((s, sidx) => idx !== sidx) });
     }
+
+    handleRemoveSubTask = (idx) => () => {
+      if(this.state.taskList.isChecked === true) {
+        console.log("pracue", this.state.taskList)
+        // this.setState({ 
+        // taskList: this.state.taskList.filter
+        // ((s, sidx) => idx !== sidx) });
+        this.setState({ 
+          taskList: this.state.taskList.filter
+          ((s, sidx) => idx !== sidx) });
+      }
+      console.log("ne pracue", this.state.taskList)
+    }
+
+      
+
+
+
+    // handleRemoveShareholder = (idx) => () => {
+    //   const task = this.state.taskList[taskIndex];
+    //   console.log("ce nase udalenie", this.state.shareholders)
+      
+    //   this.setState({ 
+    //     shareholders: this.state.shareholders.filter((i) => i.idx !== idx) });
+    // }
+
+
+    // handleRemoveShareholder(sub, taskIndex, subTaskIndex){
+    //   console.log('ce nase udalenie', this.state.isChecked);
+    //   //sub.isChecked = !sub.isChecked;
+    //   const delTask = this.state.taskList[taskIndex];
+
+    //   delTask.shift(taskIndex);
+    //   this.setState({taskList:this.state.taskList});
+    // }
+    
     //Додавання в масив даних
     handleSubTaskSubmit(data) {
       console.log(data)
@@ -71,15 +111,12 @@ class TaskForm extends React.Component {
     }
 
 // зміна стану чекбокс
-    CheckboxChange = () => {
-      console.log('is checked', this.state.isChecked);  
-      this.setState(({ isChecked }) => (
-        {
-          isChecked: !isChecked,
-          
-        }
-        
-      ));
+    checkboxChange(sub, taskIndex, subTaskIndex){
+      console.log('is checked', this.state.isChecked);
+      sub.isChecked = !sub.isChecked;
+      const task = this.state.taskList[taskIndex];
+      task[subTaskIndex] = sub;
+      this.setState({taskList:this.state.taskList});
     }
 
     render() {   
@@ -110,24 +147,31 @@ class TaskForm extends React.Component {
           {taskList.map((task, idx) => (
             <div key={idx} className="shareholder">
               <h4>{task.name}</h4>
+              <button 
+              type="button" 
+              onClick={this.handleRemoveShareholder(idx)} 
+              className="small">Видалити завдання</button>
               <ul>
               <li>
-              <SubTaskAdd taskId={idx} 
-              btnLable="Save" 
-              onSubmit={this.handleSubTaskSubmit}
-              >
-              
-              </SubTaskAdd>
+                <SubTaskAdd taskId={idx} 
+                btnLable="Save" 
+                onSubmit={this.handleSubTaskSubmit}
+                ></SubTaskAdd>
               </li>
                 {task.subTask.map((sub, i) => (<li key={i}>{sub.subName}
                 <input type="checkbox" 
                 name="statOk" 
-                value=""  
-                checked={isChecked}
-                onChange={this.CheckboxChange}>
-
-                </input> </li>))}
-               
+                value=""
+                defaultChecked={sub.isChecked}
+                onChange={() => this.checkboxChange(sub, idx, i)}>
+                </input>
+                
+                <button 
+                type="button" 
+                onClick={this.handleRemoveSubTask(idx)} 
+                className="small">Видалити складові завдання</button>
+                </li>))
+              }
               </ul>
               {/* 
               <button type="button" tabIndex="20" onClick={this.handleAddShareholder} className="small">Додати завдання</button>
