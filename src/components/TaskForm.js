@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import SubTaskAdd from './SubTaskAdd';
-
+import T from 'prop-types';
 
 class newTask {
   constructor(props) {
@@ -23,7 +23,7 @@ class TaskForm extends React.Component {
       this.state = {
         name: '',
         taskList: [],
-        isChecked: false,
+        
       };
       this.input = React.createRef();
       this.handleSubTaskSubmit = this.handleSubTaskSubmit.bind(this);//bind треба обовязково робити
@@ -57,6 +57,10 @@ class TaskForm extends React.Component {
       })
     }
     
+    
+    
+
+
 
     //для майбутнього стирання
     handleRemoveShareholder = (idx) => () => {
@@ -66,15 +70,18 @@ class TaskForm extends React.Component {
     }
 
     handleRemoveSubTask = (idx) => () => {
-      if(this.state.taskList.isChecked === true) {
-        console.log("pracue", this.state.taskList)
-        // this.setState({ 
-        // taskList: this.state.taskList.filter
-        // ((s, sidx) => idx !== sidx) });
-        this.setState({ 
-          taskList: this.state.taskList.filter
-          ((s, sidx) => idx !== sidx) });
-      }
+      const arr = this.state.taskList;
+      arr.slice(idx, 1);
+      this.setState({taskList:arr});
+
+      // if(this.state.sub.isChecked !== false) {
+      //   console.log("pracue", this.state.taskList)
+
+      //   this.setState({ 
+      //     taskList: this.state.taskList.filter
+      //     ((s, sidx) => idx !== sidx) });
+      // }
+      
       console.log("ne pracue", this.state.taskList)
     }
 
@@ -122,7 +129,7 @@ class TaskForm extends React.Component {
     render() {   
       console.log("Log from start", this.state); 
       const { taskList } = this.state;
-      const { isChecked } = this.state;
+      //const { isChecked } = this.state;
       
       return (
         <div className="Container">
@@ -179,8 +186,16 @@ class TaskForm extends React.Component {
             </div>
           ))}
           </div>
+          
         </div>
       )
     }
   }
+TaskForm.propTypes = {
+  name: T.string,
+  taskList: T.array,
+  onClick: T.func,
+  isChecked: T.bool
+}
+
 export default TaskForm;
