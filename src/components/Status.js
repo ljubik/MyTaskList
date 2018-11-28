@@ -1,6 +1,6 @@
 import React from 'react';
 import './Status.css';
-
+import App from './App';
 
 class FirePlace extends React.Component {
     constructor(props) {
@@ -29,6 +29,7 @@ class FirePlace extends React.Component {
       }
       return (
         <div>
+        <App />
           <Indicator isBurning={isBurning} />
           {button}
         </div>
@@ -37,11 +38,11 @@ class FirePlace extends React.Component {
   }
   
   function SetFireMessage(props) {
-    return <h3>Камин горит!</h3>;
+    return <h3>Камін горить!</h3>;
   }
   
   function SnuffOutMessage(props) {
-    return <h3>Камин не горит</h3>;
+    return <h3>Камін не горить</h3>;
   }
   
   function Indicator(props) {
@@ -53,11 +54,11 @@ class FirePlace extends React.Component {
   }
   
   function SetFireButton(props) {
-    return (<button className="orange" onClick={props.onClick}>Зажечь</button>);
+    return (<button className="orange" onClick={props.onClick}>Запалити</button>);
   }
   
   function SnuffOutButton(props) {
-    return (<button className="blue" onClick={props.onClick}>Потушить</button>);
+    return (<button className="blue" onClick={props.onClick}>Загасити</button>);
   }
   
   export default FirePlace;

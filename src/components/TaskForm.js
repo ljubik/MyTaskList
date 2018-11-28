@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import SubTaskAdd from './SubTaskAdd';
 import T from 'prop-types';
+import App from './App'
 
 class newTask {
   constructor(props) {
@@ -57,18 +58,13 @@ class TaskForm extends React.Component {
       })
     }
     
-    
-    
-
-
-
-    //для майбутнього стирання
+//для стирання цілого блоку
     handleRemoveShareholder = (idx) => () => {
       this.setState({ 
         taskList: this.state.taskList.filter
         ((s, sidx) => idx !== sidx) });
     }
-
+//для стирання одного завдання
     handleRemoveSubTask = (idx) => () => {
       const arr = this.state.taskList;
       arr.slice(idx, 1);
@@ -84,30 +80,8 @@ class TaskForm extends React.Component {
       
       console.log("ne pracue", this.state.taskList)
     }
-
-      
-
-
-
-    // handleRemoveShareholder = (idx) => () => {
-    //   const task = this.state.taskList[taskIndex];
-    //   console.log("ce nase udalenie", this.state.shareholders)
-      
-    //   this.setState({ 
-    //     shareholders: this.state.shareholders.filter((i) => i.idx !== idx) });
-    // }
-
-
-    // handleRemoveShareholder(sub, taskIndex, subTaskIndex){
-    //   console.log('ce nase udalenie', this.state.isChecked);
-    //   //sub.isChecked = !sub.isChecked;
-    //   const delTask = this.state.taskList[taskIndex];
-
-    //   delTask.shift(taskIndex);
-    //   this.setState({taskList:this.state.taskList});
-    // }
-    
-    //Додавання в масив даних
+   
+//Додавання в масив даних
     handleSubTaskSubmit(data) {
       console.log(data)
       const {taskId, subName, isChecked} = data;//отримуємо дані з суб таску
@@ -133,6 +107,7 @@ class TaskForm extends React.Component {
       
       return (
         <div className="Container">
+           <App />
            <div className="jumbotron">
            <h1 className ="display-3">
           Список справ

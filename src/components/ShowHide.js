@@ -1,4 +1,5 @@
 import React from 'react';
+import App from './App';
 
 function DangerAlert(props) {
     return (
@@ -22,10 +23,11 @@ function DangerAlert(props) {
     render() {
       return (
         <div>
+          <App />
           {this.state.isDangerAlertShowed ? 
-            <DangerAlert text={'Внимание! В приложении возникли некоторые проблемы!'} /> : null}
+            <DangerAlert text={'Увага! В додатку виникла помилка'} /> : null}
           <button onClick={this.toggleDangerAlert}>
-            {this.state.isDangerAlertShowed ? 'Скрыть' : 'Показать'}
+            {this.state.isDangerAlertShowed ? 'Сховати' : 'Показати'}
           </button>
         </div>
       );

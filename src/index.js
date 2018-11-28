@@ -1,24 +1,36 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import TaskForm from './components/TaskForm';
-import { BrowserRouter } from 'react-router-dom';
-//import { Route, Link } from 'react-router-dom';
-import {
-    BrowserRouter as Router,
-    Route
-  } from 'react-router-dom';
-import routes from './routes.js';
-//import CheckArr from './components/CheckArr';
-//import FirePlace from './components/Status';
-//import ShowHide from './components/ShowHide';
+
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Link, heshHistory } from 'react-router-dom';
+// import {
+//     BrowserRouter as Router,
+//     Route, 
+//   } from 'react-router-dom';
+//import routes from './routes.js';
 import App from './components/App';
+import TaskForm from './components/TaskForm';
+import CheckArr from './components/CheckArr';
+import FirePlace from './components/Status';
+import ShowHide from './components/ShowHide';
 
 
 
 
-//ReactDOM.render(<BrowserRouter><TaskForm /></BrowserRouter>, document.getElementById('root'));
+
+//ReactDOM.render(<TaskForm />, document.getElementById('root'));
 //ReactDOM.render(<CheckArr />, document.getElementById('root'));
 //ReactDOM.render(<FirePlace />, document.getElementById('root'));
 //ReactDOM.render(<ShowHide />, document.getElementById('root'));
 //ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<BrowserRouter><App  Router={routes} /></BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(
+  <Router history="heshHistory">
+    <div>
+      <Route exact path="/" component={App}/>
+      <Route path="/components/TaskForm" component={TaskForm}/>
+      <Route path="/components/FirePlace" component={FirePlace}/>
+      <Route path="/components/ShowHide" component={ShowHide}/>
+      <Route path="/components/CheckArr" component={CheckArr}/>
+    </div>
+  </Router>, 
+document.getElementById('root'));

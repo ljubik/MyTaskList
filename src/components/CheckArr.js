@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import App from './App';
 
 class CheckArr extends Component {
     state = {
@@ -19,6 +20,7 @@ class CheckArr extends Component {
         const { isChecked } = this.state;
         return (
         <div>
+          <App />
           <input type="checkbox" 
           name="statOk" 
           value="false" 
