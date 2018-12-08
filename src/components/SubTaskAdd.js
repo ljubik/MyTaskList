@@ -24,7 +24,7 @@ class SubTaskAdd extends Component {
         this.input.current.value = '';
         this.setState({
             subName: '',
-            isChecked: false
+            isChecked: false,
         })
     }
     handleChange(event) {

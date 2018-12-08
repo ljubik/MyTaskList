@@ -3,11 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Link, heshHistory } from 'react-router-dom';
-// import {
-//     BrowserRouter as Router,
-//     Route, 
-//   } from 'react-router-dom';
-//import routes from './routes.js';
+import ArrayComp from './array/ArrayComp.js';
 import App from './components/App';
 import TaskForm from './components/TaskForm';
 import CheckArr from './components/CheckArr';
@@ -31,6 +27,7 @@ ReactDOM.render(
       <Route path="/components/FirePlace" component={FirePlace}/>
       <Route path="/components/ShowHide" component={ShowHide}/>
       <Route path="/components/CheckArr" component={CheckArr}/>
+      <Route path="/array/ArrayComp" component={ArrayComp}/>
     </div>
   </Router>, 
 document.getElementById('root'));

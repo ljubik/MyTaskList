@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
-import { BrowserRouter } from 'react-router-dom';
 import { Route, Link } from 'react-router-dom';
-import routes from '../routes';
+
 
 
 const Products = ({match}) => (
@@ -14,11 +13,24 @@ const Products = ({match}) => (
 );
 
 class App extends React.Component {
+  state = {
+    loading: true,
+  }
+
+  async componentDidMount(){
+    this.setState({
+      loading: false,
+    })
+  }
+  
   render() {
+    if (this.setState.loading) {
+      return <h2>Loading...</h2>
+    }
      
   return (
     
-      // <BrowserRouter>
+      
       <div>
         <ul>
         <Link to="/"><p>HOME</p></Link>
@@ -26,12 +38,10 @@ class App extends React.Component {
         <Link to="/components/FirePlace"><p>FirePlace</p></Link>
         <Link to="/components/ShowHide"><p>ShowHide</p></Link>
         <Link to="/components/CheckArr"><p>CheckArr</p></Link>
+        <Link to="/array/ArrayComp"><p>ArrayComp</p></Link>
         </ul>  
-        {/* <Route path="{routes.TaskForm}" component={TaskForm} />
-        <Route path="./Products" component={Products} />   */}
-      </div>
-      // </BrowserRouter>
-           
+        
+      </div>       
       
   );
   }
