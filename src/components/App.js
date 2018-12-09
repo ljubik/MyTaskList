@@ -39,6 +39,7 @@ class App extends React.Component {
         <Link to="/components/ShowHide"><p>ShowHide</p></Link>
         <Link to="/components/CheckArr"><p>CheckArr</p></Link>
         <Link to="/array/ArrayComp"><p>ArrayComp</p></Link>
+        <Link to="/localstore/LocalStore"><p>LocalStore</p></Link>
         </ul>  
         
       </div>       

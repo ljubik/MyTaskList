@@ -9,16 +9,9 @@ import TaskForm from './components/TaskForm';
 import CheckArr from './components/CheckArr';
 import FirePlace from './components/Status';
 import ShowHide from './components/ShowHide';
+import LocalStore from './localstore/LocalStore';
 
 
-
-
-
-//ReactDOM.render(<TaskForm />, document.getElementById('root'));
-//ReactDOM.render(<CheckArr />, document.getElementById('root'));
-//ReactDOM.render(<FirePlace />, document.getElementById('root'));
-//ReactDOM.render(<ShowHide />, document.getElementById('root'));
-//ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
   <Router history="heshHistory">
     <div>
@@ -28,6 +21,7 @@ ReactDOM.render(
       <Route path="/components/ShowHide" component={ShowHide}/>
       <Route path="/components/CheckArr" component={CheckArr}/>
       <Route path="/array/ArrayComp" component={ArrayComp}/>
+      <Route path="/localstore/LocalStore" component={LocalStore}/>
     </div>
   </Router>, 
 document.getElementById('root'));

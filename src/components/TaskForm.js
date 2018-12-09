@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import SubTaskAdd from './SubTaskAdd';
 import T from 'prop-types';
-import App from './App'
+import App from './App';
+import SimpleStorage from "react-simple-storage";
 
 class newTask {
   constructor(props) {
@@ -16,7 +17,16 @@ class newTask {
 //     this.subTask = props.subTask || [];
 // } 
 
+
+// reactLocalStorage.setObject(this.state.taskList, {name: this.state.taskList.name});
+
+
+
+
+
 class TaskForm extends React.Component {
+  
+  
 
   constructor(props) {
     super(props);
@@ -128,6 +138,7 @@ class TaskForm extends React.Component {
            <App />
            <div className="jumbotron">
            <h1 className ="display-3">
+           <SimpleStorage parent={this} />
           Список справ
            </h1>
           <form onSubmit={this.handleSubmit}>
@@ -178,6 +189,11 @@ class TaskForm extends React.Component {
           ))}
           </div>
           
+          <button 
+                type="button" 
+                onClick={this.handleLokalStor} 
+                className="small">localstor test</button>
+
         </div>
       )
   }

@@ -44,7 +44,6 @@ class SubTaskAdd extends Component {
             onChange={this.handleChange}
         />
           <button type="button" 
-          tabIndex="20" 
           onClick={this.handleAddShareholder} 
           className="small">{label}
           </button>
