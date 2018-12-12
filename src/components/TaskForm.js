@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import SubTaskAdd from './SubTaskAdd';
 import T from 'prop-types';
 import App from './App';
-import SimpleStorage from "react-simple-storage";
+//import storageService from '../localstore/storageService';
+// import SimpleStorage from "react-simple-storage";
 
 class newTask {
   constructor(props) {
@@ -18,15 +19,7 @@ class newTask {
 // } 
 
 
-// reactLocalStorage.setObject(this.state.taskList, {name: this.state.taskList.name});
-
-
-
-
-
 class TaskForm extends React.Component {
-  
-  
 
   constructor(props) {
     super(props);
@@ -48,6 +41,7 @@ class TaskForm extends React.Component {
   }
   
   async componentDidMount(){
+    
       this.setState({
         loading: false,
       })
@@ -76,7 +70,11 @@ class TaskForm extends React.Component {
         name: '',
         taskList: taskList,
         
-    })
+      })
+      
+
+      this.setItem(name, this.input.current.value);
+
   }
     
 //для стирання цілого блоку
@@ -101,7 +99,22 @@ class TaskForm extends React.Component {
       
       console.log("ne pracue", this.state.taskList)
   }
-   
+
+  setItem(key, value) {
+    var value = { 
+      name: this.name,
+      taskList: [this.subName, this.isChecked],
+    };
+    // var serialObj = JSON.stringify(value);
+    // localStorage.setItem(key, serialObj);
+    localStorage.setItem(key, value);
+  }
+  
+  clear() {
+  localStorage.clear(); 
+  }
+
+
 //Додавання в масив даних
   handleSubTaskSubmit(data) {
       console.log("Додавання в масив", data)
@@ -110,6 +123,7 @@ class TaskForm extends React.Component {
       taskList[taskId].subTask.push({subName: subName, isChecked: isChecked});//додавання в масив в елемент таск ід
       //console.log(taskList, "recive dani");
       this.setState({taskList:taskList});
+      this.setItem(taskId, data);
   }
 
 // зміна стану чекбокс
@@ -131,14 +145,13 @@ class TaskForm extends React.Component {
 
       console.log("Log from start", this.state); 
       const { taskList } = this.state;
-      //const { isChecked } = this.state;
-      
+            
       return (
         <div className="Container">
            <App />
            <div className="jumbotron">
            <h1 className ="display-3">
-           <SimpleStorage parent={this} />
+           {/* <SimpleStorage parent={this} /> */}
           Список справ
            </h1>
           <form onSubmit={this.handleSubmit}>
@@ -191,9 +204,8 @@ class TaskForm extends React.Component {
           
           <button 
                 type="button" 
-                onClick={this.handleLokalStor} 
-                className="small">localstor test</button>
-
+                onClick={this.handleLokalStore} 
+                className="small">localstore test</button>
         </div>
       )
   }

@@ -7,11 +7,11 @@ class myArr {
 
     }
 
-  } 
+} 
 
-localStorage.setItem('myKey', 'myValue');
-var staticArr = [1,2,3,4,5];
-var add = 'test';
+// localStorage.setItem('myKey', 'myValue');
+var staticArr = [];
+//var add = 'test';
 var countAdd = 0;
 var countRem = 0;
 
@@ -41,39 +41,38 @@ handleFormSubmit() {
 }
 
  
-handleAdd(){
+handleAdd() {
 
     countAdd = countAdd+1;
-    staticArr.push(add);
+    staticArr.push(countAdd);
     console.log(staticArr);
-    try {
-        localStorage.setItem('user', 'Liubik');
-      } catch (e) {
-        if (e == this.QUOTA_EXCEEDED_ERR) {
-         alert('перевищено ліміт додавання');
-        }
-      }
+    // try {
+        localStorage.setItem('user', '{countAdd}');
+    //   } catch (e) {
+    //     if (e == this.QUOTA_EXCEEDED_ERR) {
+    //      alert('перевищено ліміт додавання');
+    //     }
+    //   }
 }
 
 handleRemove(){
     
     countRem = countRem-1;
     staticArr.splice(countRem, 1);
-    // console.log(staticArr);
+    console.log(staticArr);
     localStorage.removeItem("myKey");
     console.log('Local store remove', localStorage);
 }
 
-handleLocal(){
+handleLocal() {
     var localValue = localStorage.getItem('myKey');
     var obj = {
         item1: 1,
         item2: [123, "two", 3.0],
         item3:"hello"
     };
-     
-        
-   console.log(localValue);
+   
+   console.log(localStorage.getItem);
 }
 
     render() {
@@ -104,3 +103,9 @@ handleLocal(){
 }
 
 export default ArrayComp;
+
+
+// Завдання на LocalSotage:
+// 1. створити джаваскрипт модуль storageService який буде містити дві функції setItem, getItem
+// 2. Створити реакт компоненту яка на componentDidMount буде витягувати всі Таски з LocalSotage використовуючи модуль storageService і записувати їх у власний стейт
+// 3. При додаванні/редагуванні нової таски LocalSotage має обновлятись
