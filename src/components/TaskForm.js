@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import SubTaskAdd from './SubTaskAdd';
 import T from 'prop-types';
 import App from './App';
-//import storageService from '../localstore/storageService';
+import {getItem, setItem, clearAll, removeItem } from '../localstore/storageService';
 // import SimpleStorage from "react-simple-storage";
 
 class newTask {
@@ -41,20 +41,21 @@ class TaskForm extends React.Component {
   }
   
   async componentDidMount(){
-    
+    const taskList = getItem('taskList');
+    if(taskList) {
+      this.setState({taskList: JSON.parse(taskList)})
+    }
       this.setState({
         loading: false,
       })
   }
     
   handleNameChange (event) {
-      this.setState({ name: event.target.value });
-      
+      this.setState({ name: event.target.value });  
   }
 
   handleBoxChange (event) {
-      this.setState( {isChecked: event.target.checked});
-            
+      this.setState( {isChecked: event.target.checked});       
   }
      
   handleSubmit (event) {
@@ -72,8 +73,7 @@ class TaskForm extends React.Component {
         
       })
       
-
-      this.setItem(name, this.input.current.value);
+      setItem('taskList', JSON.stringify(taskList));
 
   }
     
@@ -83,6 +83,7 @@ class TaskForm extends React.Component {
         taskList: this.state.taskList.filter
         ((s, sidx) => idx !== sidx) });
   }
+
 //для стирання одного завдання
   handleRemoveSubTask = (idx) => () => {
       const arr = this.state.taskList;
@@ -100,20 +101,6 @@ class TaskForm extends React.Component {
       console.log("ne pracue", this.state.taskList)
   }
 
-  setItem(key, value) {
-    var value = { 
-      name: this.name,
-      taskList: [this.subName, this.isChecked],
-    };
-    // var serialObj = JSON.stringify(value);
-    // localStorage.setItem(key, serialObj);
-    localStorage.setItem(key, value);
-  }
-  
-  clear() {
-  localStorage.clear(); 
-  }
-
 
 //Додавання в масив даних
   handleSubTaskSubmit(data) {
@@ -123,7 +110,8 @@ class TaskForm extends React.Component {
       taskList[taskId].subTask.push({subName: subName, isChecked: isChecked});//додавання в масив в елемент таск ід
       //console.log(taskList, "recive dani");
       this.setState({taskList:taskList});
-      this.setItem(taskId, data);
+      
+      setItem('taskList', JSON.stringify(taskList));
   }
 
 // зміна стану чекбокс
@@ -135,6 +123,9 @@ class TaskForm extends React.Component {
       this.setState({taskList:this.state.taskList});
   }
 
+  handleLokalStoreClear(){
+    clearAll();
+  }
     
 
   render() { 
@@ -204,8 +195,8 @@ class TaskForm extends React.Component {
           
           <button 
                 type="button" 
-                onClick={this.handleLokalStore} 
-                className="small">localstore test</button>
+                onClick={this.handleLokalStoreClear} 
+                className="small">localstore clear</button>
         </div>
       )
   }
