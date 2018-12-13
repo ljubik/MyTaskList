@@ -1,10 +1,9 @@
-export default function setItem(key, value) {
+export function setItem(key, value) {
   localStorage.setItem(key, value);
 };
 
 export function getItem(key, _default) {
-  var localValue = localStorage.getItem(key);
-  
+  return localStorage.getItem(key) || _default;
 };
 
 // export default function clear() {

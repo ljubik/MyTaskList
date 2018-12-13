@@ -1,21 +1,40 @@
 import React, { Component } from "react";
-
-import SimpleStorage from "react-simple-storage";
+import {getItem, setItem } from './storageService';
 
 class LocalStore extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newItem: "",
-      list: []
+      list: [],
+      demoData: [],
+      testItem: ''
     };
+    this.updateInputDemo = this.updateInputDemo.bind(this);
+    this.addDemoItem = this.addDemoItem.bind(this);
+  }
+  componentDidMount() {
+    const demoData = getItem('demoData');
+    if(demoData) {
+      this.setState({demoData: JSON.parse(demoData)})
+    }
   }
 
   updateInput(key, value) {
     // update react state
     this.setState({ [key]: value });
   }
+  updateInputDemo(key, value) {
+    // update react state
 
+    this.setState({ [key]: value });
+  }
+  addDemoItem() {
+    const {demoData, testItem} = this.state;
+    demoData.push(testItem);
+    this.setState({demoData, testItem: ''});
+    setItem('demoData', JSON.stringify(demoData));
+  }
   addItem() {
     // create a new item with unique id
     const newItem = {
@@ -46,15 +65,38 @@ class LocalStore extends Component {
   }
 
   render() {
+    const {demoData} = this.state;
     return (
       <div className="App">
-      
-        <SimpleStorage parent={this} />
-      
         <header className="App-header">
-         
           <h1 className="App-title">Welcome to React LocalStorage Tutorial</h1>
         </header>
+        {/*begin*/}
+        <div>
+          <h3>Приклад</h3>
+          <input
+            type="text"
+            placeholder="Type item here"
+            value={this.state.testItem}
+            onChange={e => this.updateInputDemo("testItem", e.target.value)}
+          />
+          <button
+            onClick={() => this.addDemoItem()}
+          >&#43; Add
+          </button>
+        </div>
+        <div>
+          <ul>
+            {demoData.map((item, index ) => {
+              return (
+                <li key={index}>
+                  {item}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        {/*End */}
         <div
           style={{
             padding: 50,
