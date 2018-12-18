@@ -85,20 +85,18 @@ class TaskForm extends React.Component {
   }
 
 //для стирання одного завдання
-  handleRemoveSubTask = (idx) => () => {
-      const arr = this.state.taskList;
-      arr.splice(idx, 1);
-      this.setState({taskList:arr});
+  handleRemoveSubTask = (taskId, subTaskId, _nameKey = 'subTask' ) => () => {
+    // if(!_nameKey) {
+    //   _nameKey = 'subTask';
+    // }
+    // Ідентична логіка
+    // _nameKey = _nameKey || 'subTask';
 
-      // if(this.state.sub.isChecked !== false) {
-      //   console.log("pracue", this.state.taskList)
-
-      //   this.setState({ 
-      //     taskList: this.state.taskList.filter
-      //     ((s, sidx) => idx !== sidx) });
-      // }
-      
-      console.log("ne pracue", this.state.taskList)
+    // 1 вибираємо таску по taskId. в вибраній тасці звертаємось до масиву subTask і видаляємо з нього
+    // саб таску з subTaskId
+    this.state.taskList[taskId].subTask.splice(subTaskId, 1);
+    this.setState({taskList: this.state.taskList});
+    setItem('taskList', JSON.stringify(this.state.taskList));
   }
 
 
@@ -183,7 +181,7 @@ class TaskForm extends React.Component {
                 
                 <button 
                 type="button" 
-                onClick={this.handleRemoveSubTask(idx)} 
+                onClick={this.handleRemoveSubTask(idx, i, 'name')}
                 className="small">Видалити складові завдання</button>
                 </li>))
               }
