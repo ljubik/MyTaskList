@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import _ from 'lodash';
 import 'bootstrap/dist/css/bootstrap.css'
 import SubTaskAdd from './SubTaskAdd';
 import T from 'prop-types';
@@ -17,7 +18,12 @@ class newTask {
 //     this.name = props.name || 'Some name';
 //     this.subTask = props.subTask || [];
 // } 
-
+function _getProprety(object, key, _default) {
+  if(object !== undefined && object[key] !== undefined) {
+    return object[key];
+  }
+  return _default;
+}
 
 class TaskForm extends React.Component {
 
@@ -94,6 +100,10 @@ class TaskForm extends React.Component {
 
     // 1 вибираємо таску по taskId. в вибраній тасці звертаємось до масиву subTask і видаляємо з нього
     // саб таску з subTaskId
+    // const _task = this.state.taskList[taskId];
+    // console.log(_task);
+    // const _subTask = _.get(_task, 'subTask[0].subName', []);
+    // console.log(_subTask);
     this.state.taskList[taskId].subTask.splice(subTaskId, 1);
     this.setState({taskList: this.state.taskList});
     setItem('taskList', JSON.stringify(this.state.taskList));
