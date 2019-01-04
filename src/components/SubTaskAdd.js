@@ -18,7 +18,7 @@ class SubTaskAdd extends Component {
         onSubmit({
             subName: this.state.subName,
             taskId: taskId,
-            
+            isChecked: false,
         });
      }
         this.input.current.value = '';

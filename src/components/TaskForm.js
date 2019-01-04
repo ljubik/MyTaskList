@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import SubTaskAdd from './SubTaskAdd';
 import T from 'prop-types';
 import App from './App';
-import {getItem, setItem, clearAll, removeItem } from '../localstore/storageService';
+import {getItem, setItem, clearAll } from '../localstore/storageService';
 // import SimpleStorage from "react-simple-storage";
 
 class newTask {
@@ -48,9 +48,14 @@ class TaskForm extends React.Component {
   
   async componentDidMount(){
     const taskList = getItem('taskList');
-    if(taskList) {
+
+    if(_.isEmpty(taskList)) {
+      clearAll();
+    }else {
       this.setState({taskList: JSON.parse(taskList)})
     }
+
+    //clearAll();
       this.setState({
         loading: false,
       })
@@ -88,6 +93,8 @@ class TaskForm extends React.Component {
       this.setState({ 
         taskList: this.state.taskList.filter
         ((s, sidx) => idx !== sidx) });
+        //const taskList = this.state.taskList;
+      setItem('taskList', JSON.stringify(this.state.taskList));
   }
 
 //для стирання одного завдання
@@ -127,8 +134,10 @@ class TaskForm extends React.Component {
       console.log('is checked', this.state.isChecked);
       sub.isChecked = !sub.isChecked;
       const task = this.state.taskList[taskIndex];
+      //console.log('after chenge', this.state.taskList[taskIndex]);
       task[subTaskIndex] = sub;
       this.setState({taskList:this.state.taskList});
+      setItem('taskList', JSON.stringify(this.state.taskList));
   }
 
   handleLokalStoreClear(){
@@ -141,10 +150,12 @@ class TaskForm extends React.Component {
       // if (this.setState.loading) {
       //   return <h2>Loading...</h2>
       // }
-
-      console.log("Log from start", this.state); 
+      
+       
       const { taskList } = this.state;
-            
+      console.log("Log from start", taskList);
+      console.log("Log", _.isEmpty(taskList)); 
+         
       return (
         <div className="Container">
            <App />
