@@ -1,6 +1,11 @@
 {
   "name": "first-project",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ljubik/MyTaskList.git"
+  },
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@version/react-router-v3": "^1.0.0",

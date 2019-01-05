@@ -90,11 +90,16 @@ class TaskForm extends React.Component {
     
 //для стирання цілого блоку
   handleRemoveShareholder = (idx) => () => {
-      this.setState({ 
-        taskList: this.state.taskList.filter
-        ((s, sidx) => idx !== sidx) });
-        //const taskList = this.state.taskList;
+    this.state.taskList.splice(idx, 1);
+    this.setState({taskList: this.state.taskList});
+    
+    // //стара реалізація через фільтр, має глюк не видаляє останній елемент  
+    // this.setState({ 
+    //     taskList: this.state.taskList.filter
+    //     ((s, sidx) => idx !== sidx) });
+    //     //const taskList = this.state.taskList;
       setItem('taskList', JSON.stringify(this.state.taskList));
+
   }
 
 //для стирання одного завдання
