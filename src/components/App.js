@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
 import { Route, Link } from 'react-router-dom';
 
-
-
-const Products = ({match}) => (
-<div>
-  <ul>
-    <b>Produkty</b>
-  </ul>
-</div>
-);
 
 class App extends React.Component {
   state = {
@@ -28,24 +20,22 @@ class App extends React.Component {
       return <h2>Loading...</h2>
     }
      
-  return (
-    
-      
-      <div>
-        <ul>
-        <Link to="/"><p>HOME</p></Link>
-        <Link to="/components/TaskForm"><p>TaskForm</p></Link>
-        <Link to="/components/FirePlace"><p>FirePlace</p></Link>
-        <Link to="/components/ShowHide"><p>ShowHide</p></Link>
-        <Link to="/components/CheckArr"><p>CheckArr</p></Link>
-        <Link to="/array/ArrayComp"><p>ArrayComp</p></Link>
-        <Link to="/localstore/LocalStore"><p>LocalStore</p></Link>
-        </ul>  
-        
-      </div>       
-      
+  return (  
+    <div className="menu">
+      <nav className="navbar navbar-default" role="navigation">
+        <ul className="nav-justified"> 
+          <li><Link to="/" className="dropdown-toggle" data-toggle="dropdown">HOME <span className="caret"></span></Link></li>   
+          <li><Link to="/components/TaskForm">TaskForm </Link></li>
+          <li><Link to="/components/FirePlace">FirePlace </Link></li>
+          <li><Link to="/components/ShowHide">ShowHide </Link></li>
+          <li><Link to="/components/CheckArr">CheckArr </Link></li>
+          <li><Link to="/array/ArrayComp">ArrayComp </Link></li>
+          <li><Link to="/localstore/LocalStore">LocalStore </Link></li>
+        </ul> 
+      </nav> 
+    </div>       
   );
-  }
-}
+  };
+};
  
 export default App;

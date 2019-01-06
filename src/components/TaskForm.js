@@ -74,10 +74,10 @@ class TaskForm extends React.Component {
       const { name, taskList } = this.state;
       const task = new newTask({
         name: name,
-        
+        taskList: taskList,
       });
       taskList.push(task);
-      this.input.current.value = '';
+      this.input.current.value = '';//для очистики поля вводу
       this.setState({
         name: '',
         taskList: taskList,
@@ -92,13 +92,12 @@ class TaskForm extends React.Component {
   handleRemoveShareholder = (idx) => () => {
     this.state.taskList.splice(idx, 1);
     this.setState({taskList: this.state.taskList});
-    
     // //стара реалізація через фільтр, має глюк не видаляє останній елемент  
     // this.setState({ 
     //     taskList: this.state.taskList.filter
     //     ((s, sidx) => idx !== sidx) });
     //     //const taskList = this.state.taskList;
-      setItem('taskList', JSON.stringify(this.state.taskList));
+    setItem('taskList', JSON.stringify(this.state.taskList));
 
   }
 
@@ -110,8 +109,8 @@ class TaskForm extends React.Component {
     // Ідентична логіка
     // _nameKey = _nameKey || 'subTask';
 
-    // 1 вибираємо таску по taskId. в вибраній тасці звертаємось до масиву subTask і видаляємо з нього
-    // саб таску з subTaskId
+    // 1 вибираємо таску по taskId. в вибраній тасці звертаємось до масиву 
+    // subTask і видаляємо з нього саб таску з subTaskId
     // const _task = this.state.taskList[taskId];
     // console.log(_task);
     // const _subTask = _.get(_task, 'subTask[0].subName', []);
@@ -124,19 +123,19 @@ class TaskForm extends React.Component {
 
 //Додавання в масив даних
   handleSubTaskSubmit(data) {
-      console.log("Додавання в масив", data)
-      const {taskId, subName, isChecked} = data;//отримуємо дані з суб таску
+      //console.log("Додавання в масив", data)
+      const {taskId, subName, isChecked } = data;//отримуємо дані з суб таску
       const {taskList} = this.state;
-      taskList[taskId].subTask.push({subName: subName, isChecked: isChecked});//додавання в масив в елемент таск ід
+      taskList[taskId].subTask.push({subName: subName, isChecked: false});//додавання в масив в елемент таск ід
       //console.log(taskList, "recive dani");
       this.setState({taskList:taskList});
       
       setItem('taskList', JSON.stringify(taskList));
   }
 
-// зміна стану чекбокс
+// зміна стану чекбокс _nameKey = 'subTask'
   checkboxChange(sub, taskIndex, subTaskIndex){
-      console.log('is checked', this.state.isChecked);
+      console.log('is checked', sub);
       sub.isChecked = !sub.isChecked;
       const task = this.state.taskList[taskIndex];
       //console.log('after chenge', this.state.taskList[taskIndex]);
@@ -152,14 +151,14 @@ class TaskForm extends React.Component {
 
   render() { 
       //Для показування завантаження при запуску
-      // if (this.setState.loading) {
-      //   return <h2>Loading...</h2>
-      // }
+      if (this.setState.loading) {
+        return <h2>Loading...</h2>
+      }
       
        
       const { taskList } = this.state;
       console.log("Log from start", taskList);
-      console.log("Log", _.isEmpty(taskList)); 
+      //console.log("Log", _.isEmpty(taskList)); 
          
       return (
         <div className="Container">

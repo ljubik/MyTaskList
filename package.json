@@ -1,5 +1,6 @@
 {
   "name": "first-project",
+  "homepage" : "http://task.cil.org.ua",
   "version": "0.1.0",
   "repository": {
     "type": "git",

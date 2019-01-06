@@ -13,7 +13,7 @@ class SubTaskAdd extends Component {
     }
     handleAddShareholder() {
      const {onSubmit, taskId} = this.props;
-     console.log("handleAddShareholder", this.state, "from subTaskAdd")
+    //  console.log("handleAddShareholder", this.state, "from subTaskAdd")
      if(typeof onSubmit === "function") {
         onSubmit({
             subName: this.state.subName,
@@ -24,6 +24,7 @@ class SubTaskAdd extends Component {
         this.input.current.value = '';
         this.setState({
             subName: '',
+            taskId: taskId,
             isChecked: false,
         })
     }
