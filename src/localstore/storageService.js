@@ -10,7 +10,3 @@ export function clearAll() {
   localStorage.clear();
   
 };
-
-export default function removeItem(key) {
-  localStorage.removeItem(key);
-};

@@ -1,73 +1,96 @@
-import React, {Component} from 'react';
-import App from './App';
+import React, { Component } from "react";
+import App from "./App";
 
-import { createStore } from 'redux'
-
+import { createStore } from "redux";
 
 function counter(state = 0, action) {
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
     default:
-      return state
+      return state;
   }
 }
 
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
-let store = createStore(counter)
+let store = createStore(counter);
 
 // You can use subscribe() to update the UI in response to state changes.
 // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
 // However it can also be handy to persist the current state in the localStorage.
 
-store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => console.log(store.getState()));
 
 // The only way to mutate the internal state is to dispatch an action.
 // The actions can be serialized, logged or stored and later replayed.
-store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: "INCREMENT" });
 // 1
-store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: "INCREMENT" });
 // 2
-store.dispatch({ type: 'DECREMENT' })
+store.dispatch({ type: "DECREMENT" });
 // 1
 
+class HelloUser extends React.Component {
+  constructor(props) {
+    super(props);
 
-
-
-class CheckArr extends Component {
-    state = {
-        isChecked: true,
+    this.state = {
+      username: "codeguida"
     };
 
-    CheckboxChange = () => {
-        console.log('is checked', this.state.isChecked);  
-        this.setState(({ isChecked }) => (
-          {
-            isChecked: !isChecked,
-          }
-          
-        ));
-    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    this.setState({
+      username: e.target.value
+    });
+  }
+  render() {
+    return (
+      <div>
+        Hello {this.state.username} <br />
+        Change Name:
+        <input
+          type="text"
+          value={this.state.username}
+          onChange={this.handleChange}
+        />
+      </div>
+    );
+  }
+}
 
-    render() {
-        const { isChecked } = this.state;
-        return (
-        <div>
-          <App />
-          <input type="checkbox" 
-          name="statOk" 
-          value="false" 
+class CheckArr extends Component {
+  state = {
+    isChecked: true
+  };
+
+  CheckboxChange = () => {
+    console.log("is checked", this.state.isChecked);
+    this.setState(({ isChecked }) => ({
+      isChecked: !isChecked
+    }));
+  };
+
+  render() {
+    const { isChecked } = this.state;
+    return (
+      <div>
+        <App />
+        <input
+          type="checkbox"
+          name="statOk"
+          value="false"
           checked={isChecked}
           onChange={this.CheckboxChange}
-          />
-           <button 
-            onClick={counter}   
-           />   
-        </div>)
-    }
+        />
+        <button onClick={counter} />
+      </div>
+    );
+  }
 }
 
 export default CheckArr;
