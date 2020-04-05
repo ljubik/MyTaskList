@@ -1,6 +1,12 @@
 {
   "name": "first-project",
+  "homepage" : "http://task.cil.org.ua",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ljubik/MyTaskList.git"
+  },
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@version/react-router-v3": "^1.0.0",
@@ -22,6 +28,7 @@
     "file-loader": "^2.0.0",
     "history": "^4.7.2",
     "imports-loader": "^0.8.0",
+    "lodash": "^4.17.11",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
